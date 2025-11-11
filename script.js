@@ -1,28 +1,40 @@
-const fromCurrency = document.getElementById("fromCurrency");
-const toCurrency = document.getElementById("toCurrency");
-const amount = document.getElementById("amount");
-const result = document.getElementById("result");
+const currencyList = [
+  "USD","INR","EUR","GBP","JPY","AUD","CAD","CHF","CNY","NZD","AED","SAR",
+  "SGD","HKD","SEK","NOK","DKK","ZAR","BRL","RUB","TRY","MXN","IDR","THB",
+  "PLN","PHP","MYR","VND","EGP","BDT","PKR","KWD","QAR","BHD","OMR","LKR",
+  "NGN","KES","ARS","CZK","HUF","ILS","KRW","RON"
+];
 
-const currencies = ["USD", "INR", "EUR", "GBP", "JPY", "AUD", "CAD"];
+// Populate Dropdowns
+const fromDropdown = document.getElementById("fromCurrency");
+const toDropdown = document.getElementById("toCurrency");
 
-currencies.forEach(cur => {
-    fromCurrency.innerHTML += `<option value="${cur}">${cur}</option>`;
-    toCurrency.innerHTML += `<option value="${cur}">${cur}</option>`;
+currencyList.forEach(currency => {
+  let option1 = document.createElement("option");
+  let option2 = document.createElement("option");
+  option1.value = option1.text = currency;
+  option2.value = option2.text = currency;
+  fromDropdown.add(option1);
+  toDropdown.add(option2);
 });
 
+fromDropdown.value = "USD";
+toDropdown.value = "INR";
+
+// API Based Conversion
 async function convertCurrency() {
-    const from = fromCurrency.value;
-    const to = toCurrency.value;
-    const amt = amount.value;
+  const amount = document.getElementById("amount").value;
+  const from = fromDropdown.value;
+  const to = toDropdown.value;
 
-    if(amt === "" || amt <= 0) {
-        result.innerText = "Please enter a valid amount!";
-        return;
-    }
+  if (amount === "" || amount <= 0) {
+    alert("Please enter a valid amount!");
+    return;
+  }
 
-    const res = await fetch(`https://api.exchangerate-api.com/v4/latest/${from}`);
-    const data = await res.json();
-    const rate = data.rates[to];
+  const response = await fetch(`https://api.exchangerate.host/convert?from=${from}&to=${to}&amount=${amount}`);
+  const data = await response.json();
 
-    result.innerText = `${amt} ${from} = ${(rate * amt).toFixed(2)} ${to}`;
-}
+  document.getElementById("result").innerText =
+    `${amount} ${from} = ${data.result.toFixed(2)} ${to}`;
+}s
