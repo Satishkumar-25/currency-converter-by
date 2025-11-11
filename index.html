@@ -7,15 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>🌍 Currency Converter</h1>
-    <div class="box">
-        <input type="number" id="amount" placeholder="Enter amount">
-        <select id="fromCurrency"></select>
-        <select id="toCurrency"></select>
+    <!-- Header Section -->
+    <header>
+        <div class="logo">C</div>
+        <nav>
+            <a href="#">Currency Converter</a>
+            <a href="#">Send Money</a>
+        </nav>
+    </header>
+
+    <!-- Main Converter Box -->
+    <section class="converter">
+        <h1>Currency Converter</h1>
+        <input type="number" id="amount" placeholder="Enter Amount" />
+
+        <div class="selectors">
+            <select id="fromCurrency"></select>
+            <select id="toCurrency"></select>
+        </div>
+
         <button onclick="convertCurrency()">Convert</button>
-        <h2 id="result"></h2>
-    </div>
+        <h2 id="result">Converted Amount Will Appear Here</h2>
+    </section>
+
+    <!-- Currency Information Section -->
+    <section class="info">
+        <h2>🌍 Currency Information</h2>
+        <p>• INR (Indian Rupee) is the currency of India and regulated by the Reserve Bank of India.</p>
+        <p>• USD (United States Dollar) is the most traded currency worldwide.</p>
+        <p>• EUR (Euro) is used by 20 European Union countries.</p>
+        <p>• Currency exchange rates change daily based on global market demand and supply.</p>
+    </section>
 
     <script src="script.js"></script>
 </body>
 </html>
+
+
